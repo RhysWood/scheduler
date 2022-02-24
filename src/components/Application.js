@@ -6,6 +6,7 @@ import DayList from "components/DayList";
 
 export default function Application(props) {
   const [day, setDay] = useState("Monday");
+  console.log(day);
   const days = [
     {
       id: 1,

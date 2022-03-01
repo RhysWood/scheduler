@@ -21,7 +21,7 @@ import Form from "components/Appointment/Form";
 
 
 storiesOf("Button", module)
-  .addParameters({
+  .addParameters({ 
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
   })
   .add("Base", () => <Button>Base</Button>)

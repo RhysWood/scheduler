@@ -15,3 +15,17 @@ export function getAppointmentsForDay(state, day) {
   }
   return [];
 }
+
+export function getInterview(state, interview) {
+  if (interview){
+  const result = {};
+  for (let i in state.interviewers) {
+    if (i == interview.interviewer) {
+      result["student"] = interview.student;
+      result["interviewer"] = state.interviewers[i];
+    }
+  }
+  return result;
+}
+return null
+}

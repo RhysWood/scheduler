@@ -5,7 +5,7 @@ import "components/Appointment";
 import Appointment from "components/Appointment";
 import axios from "axios";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
-import { useVisualMode } from "hooks/useVisualMode";
+// import  useVisualMode from "hooks/useVisualMode";
 
 export default function Application(props) {
   const [state, setState] = useState({
@@ -20,6 +20,26 @@ export default function Application(props) {
   const setDay = day => setState({ ...state, day });
   // const setDays = days => setState(prev => ({ ...prev, days }));
 
+  function bookInterview(id, interview) {
+
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview },
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    return axios.put(`/api/appointments/${id}`, appointment)
+      .then(() => {
+        setState({
+          ...state,
+          appointments
+        })
+      })
+  }
+
  const aptData = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
 
@@ -30,6 +50,7 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
         interviewers={dailyInterviewers}
+        bookInterview={bookInterview}
       />
     );
   });

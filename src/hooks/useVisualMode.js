@@ -9,7 +9,7 @@ const useVisualMode = function (initial) {
       return setMode(mode);
     }
     setMode(mode);
-    setHistory([...history, mode]);
+    setHistory(prev => ([...prev, mode]))
   }
 
   function back() {

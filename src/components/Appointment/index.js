@@ -37,11 +37,14 @@ export default function Appointment(props) {
       .catch(error => transition(ERROR_SAVE, true));
       
   }
+
+  function confirm() {
+    transition(CONFIRM)
+  }
   
   function deleteApt(event) {
     transition(DELETING, true);
-    props
-     .cancelInterview(props.id)
+    props.cancelInterview(props.id)
      .then(() => transition(EMPTY))
      .catch(error => transition(ERROR_DELETE, true));
    }
@@ -59,7 +62,7 @@ export default function Appointment(props) {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
-          onDelete={deleteApt}
+          onDelete={confirm}
           onEdit={edit}
         />
       )}
@@ -85,11 +88,7 @@ export default function Appointment(props) {
       {mode === CONFIRM && (
         <Confirm 
           onCancel={back}
-          onConfirm={() => {
-            transition(DELETING)
-            props.cancelInterview(props.id)
-            .then(() => transition(EMPTY))
-          }}
+          onConfirm={deleteApt}
         />
       )}
        {mode === EDIT && (

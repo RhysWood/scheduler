@@ -19,7 +19,7 @@ const useVisualMode = function (initial) {
       setMode(newHistory[newHistory.length - 1]);
     }
   }
-  
+
   return { mode, transition, back };
 };
 

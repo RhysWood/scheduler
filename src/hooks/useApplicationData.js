@@ -11,11 +11,11 @@ export default function useApplicationData(props) {
 
   const setDay = day => setState({ ...state, day });
 
-  function updateSpots (e) {
+  function updateSpots(e) {
     const daysArr = [...state.days];
     daysArr.forEach((day) => {
-    if (day.name === state.day) {
-      (e === "book") ? day.spots -= 1 : day.spots += 1;
+      if (day.name === state.day) {
+        (e === "book") ? day.spots -= 1 : day.spots += 1;
       }
     });
     return daysArr;
@@ -57,7 +57,7 @@ export default function useApplicationData(props) {
       .then(() => {
         const days = updateSpots("cancel");
         setState({
-          ...state, 
+          ...state,
           appointments,
           days
         })
@@ -102,5 +102,5 @@ export default function useApplicationData(props) {
     });
   }, []);
 
-  return { state, setDay, bookInterview, cancelInterview, editInterview, updateSpots};
+  return { state, setDay, bookInterview, cancelInterview, editInterview, updateSpots };
 }

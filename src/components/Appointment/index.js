@@ -35,19 +35,19 @@ export default function Appointment(props) {
     props.bookInterview(props.id, interview)
       .then(() => transition(SHOW))
       .catch(error => transition(ERROR_SAVE, true));
-      
+
   }
 
   function confirm() {
     transition(CONFIRM)
   }
-  
+
   function deleteApt(event) {
     transition(DELETING, true);
     props.cancelInterview(props.id)
-     .then(() => transition(EMPTY))
-     .catch(error => transition(ERROR_DELETE, true));
-   }
+      .then(() => transition(EMPTY))
+      .catch(error => transition(ERROR_DELETE, true));
+  }
 
   function edit(name, interviewer) {
     transition(EDIT)
@@ -56,7 +56,7 @@ export default function Appointment(props) {
 
   return (
     <article className="appointment">
-      <Header time={props.time}/>
+      <Header time={props.time} />
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {mode === SHOW && (
         <Show
@@ -76,28 +76,28 @@ export default function Appointment(props) {
         />
       )}
       {mode === SAVING && (
-        <Status 
+        <Status
           message="Saving"
         />
       )}
       {mode === DELETING && (
-        <Status 
+        <Status
           message="Deleting"
         />
       )}
       {mode === CONFIRM && (
-        <Confirm 
+        <Confirm
           onCancel={back}
           onConfirm={deleteApt}
         />
       )}
-       {mode === EDIT && (
+      {mode === EDIT && (
         <Form
-        interviewers={props.interviewers}
-        onCancel={() => {back()}}
-        onSave={save}
-        student={props.interview.student}
-        interviewer={props.interview.interviewer ? props.interview.interviewer.id : ""}
+          interviewers={props.interviewers}
+          onCancel={() => { back() }}
+          onSave={save}
+          student={props.interview.student}
+          interviewer={props.interview.interviewer ? props.interview.interviewer.id : ""}
         />
       )}
       {mode === ERROR_SAVE && (
@@ -108,7 +108,7 @@ export default function Appointment(props) {
       )}
       {mode === ERROR_DELETE && (
         <Error
-          message="Could not delete appointment." 
+          message="Could not delete appointment."
           back={back}
         />
       )}

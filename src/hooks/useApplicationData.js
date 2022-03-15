@@ -33,7 +33,6 @@ export default function useApplicationData(props) {
 
   function updateSpot(e, state) {
     const daysArr = [...state.days];
-    console.log(daysArr);
     daysArr.forEach((day) => {
       if (day.name === state.day) {
         if (e === "edit"){

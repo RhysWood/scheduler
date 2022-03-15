@@ -26,41 +26,51 @@ export default function useApplicationData(props) {
         interviewers: res[2].data,
       });
     });
+    // eslint-disable-next-line
   }, []);
 
   const setDay = day => setState({ ...state, day });
 
-  function updateSpots(e) {
+  function updateSpot(e, state) {
     const daysArr = [...state.days];
+    console.log(daysArr);
     daysArr.forEach((day) => {
       if (day.name === state.day) {
+        if (e === "edit"){
+          day.spots -= 0;
+          return daysArr; 
+        }
         (e === "book") ? day.spots -= 1 : day.spots += 1;
       }
     });
     return daysArr;
   };
 
-  function bookInterview(id, interview) {
-
+  const bookInterview = (id, interview) => {
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
     };
     const appointments = {
       ...state.appointments,
-      [id]: appointment
+      [id]: appointment,
     };
-
-    return axios.put(`/api/appointments/${id}`, appointment)
-      .then(() => {
-        const days = updateSpots("book", state);
+    return axios.put(`api/appointments/${id}`, appointment).then(() => {
+      if (!state.appointments[id].interview) {
+        const days = updateSpot("book", state);
         setState({
           ...state,
           appointments,
-          days
-        })
-      })
-  }
+          days,
+        });
+      } else {
+        setState({
+          ...state,
+          appointments,
+        });
+      }
+    });
+  };
 
   function cancelInterview(id) {
     const appointment = {
@@ -74,7 +84,7 @@ export default function useApplicationData(props) {
 
     return axios.delete(`/api/appointments/${id}`)
       .then(() => {
-        const days = updateSpots("cancel");
+        const days = updateSpot("cancel", state);
         setState({
           ...state,
           appointments,
@@ -95,14 +105,16 @@ export default function useApplicationData(props) {
     };
 
     return axios.put(`/api/appointments/${id}`, appointment)
-      .then(() => {
+    .then(() => {
+      // const days = updateSpot("edit", state);
         setState({
           ...state,
           appointments
+          // days
         })
       })
   }
 
 
-  return { state, setDay, bookInterview, cancelInterview, editInterview, updateSpots };
+  return { state, setDay, bookInterview, cancelInterview, editInterview, updateSpot };
 }

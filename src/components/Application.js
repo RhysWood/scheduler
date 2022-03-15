@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React, { useEffect, useState } from "react";
 import DayList from "./DayList";
 import "components/Application.scss";

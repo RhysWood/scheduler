@@ -38,6 +38,7 @@ export function getInterview(state, interview) {
   if (interview) {
     const result = {};
     for (let i in state.interviewers) {
+      // eslint-disable-next-line
       if (i == interview.interviewer) {
         result["student"] = interview.student;
         result["interviewer"] = state.interviewers[i];

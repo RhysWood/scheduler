@@ -31,3 +31,22 @@ npm test
 ```sh
 npm run storybook
 ```
+
+## Running Scheduler-API
+
+```sh
+- git clone git@github.com:lighthouse-labs/scheduler-api.git
+- Follow instructions on the scheduler-api repo
+- cd into scheduler-api & npm start
+- To test errors, run npm run error
+```
+
+## Dependencies
+
+- "axios": "^0.18.1"
+- "classnames": "^2.2.6"
+- "fsevents": "^2.3.2"
+- "normalize.css": "^8.0.1"
+- "react": "^16.9.0"
+- "react-dom": "^16.9.0"
+- "react-scripts": "3.0.0"

@@ -10,14 +10,14 @@ export default function useApplicationData(props) {
   });
 
   useEffect(() => {
-    const daysUrl = `api/days`;
-    const appointmentsUrl = "api/appointments";
-    const interviewersUrl = "api/interviewers";
+    const daysUrl = `/api/days`;
+    const appointmentsUrl = "/api/appointments";
+    const interviewersUrl = "/api/interviewers";
 
     const getDays = axios.get(daysUrl);
     const getAppointments = axios.get(appointmentsUrl);
     const getInterviewer = axios.get(interviewersUrl);
-
+    
     Promise.all([getDays, getAppointments, getInterviewer]).then((res) => {
       setState({
         ...state,

@@ -86,16 +86,13 @@ describe('Application', () => {
   });
 
   it('loads data, edits an interview and keeps the spots remaining for Monday the same', async () => {
-    // 1. Render the Application.
     const { container } = render(<Application />);
 
-    // 2. Wait until the text "Archie Cohen" is displayed.
     await waitForElement(() => getByText(container, 'Archie Cohen'));
     const appointment = getAllByTestId(container, 'appointment').find(
       (appointment) => queryByText(appointment, 'Archie Cohen')
     );
 
-    // 3. Click the "Edit" button on the booked appointment.
     fireEvent.click(queryByAltText(appointment, 'Edit'));
     expect(getByText(appointment, 'Save')).toBeInTheDocument();
 
@@ -103,7 +100,6 @@ describe('Application', () => {
       target: { value: 'Lydia Miller-Jones' },
     });
 
-    // 4. Click the "Save" button on the confirmation.
     fireEvent.click(queryByText(appointment, 'Save'));
     expect(getByText(appointment, 'Saving')).toBeInTheDocument();
 
